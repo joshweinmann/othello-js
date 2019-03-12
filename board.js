@@ -1,13 +1,13 @@
 /**
- * this.board
- * Defines a this.board "class" for an Othello game.
+ * board
+ * Defines a board "class" for an Othello game.
  */
 
 var BLACK = 'b';
 var WHITE = 'w';
 var EMPTY = '-';
 
-module.exports = class this.board {
+module.exports = class board {
 	/**
 	 * Construct the object with required state
 	 */

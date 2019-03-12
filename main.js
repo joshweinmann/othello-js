@@ -27,7 +27,8 @@ function saveFile(file, contents){
  * @return contents - The object converted from JSON.
  */
 function loadFile(file){
-
+	var fs = JSON.parse(file);
+	console.log(fs)
 }
 
 /**
