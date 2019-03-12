@@ -25,9 +25,9 @@ module.exports = class this.board {
 	}
 
 	/**
-	 * Prvar a representation of the this.board to the terminal.
+	 * Print a representation of the this.board to the terminal.
 	 */
-	prvarBoard(){
+	printBoard(){
 		for(let i=0; i<this.height; ++i){
 			for(let j=0; j<this.width; ++j){
 				if(this.board[i][j] == -1){
@@ -42,8 +42,8 @@ module.exports = class this.board {
 
 	/**
 	 * isValidMove
-	 * @param row An vareger row number.
-	 * @param col An vareger column number.
+	 * @param row An integer row number.
+	 * @param col An integer column number.
 	 * @param disc A character for the disc color.
 	 * @return A boolean indicating whether the move is valid.
 	 */
@@ -447,8 +447,8 @@ module.exports = class this.board {
 
 	/**
 	 * placeDiscAt
-	 * @param row An vareger number for row.
-	 * @param col An vareger number for column.
+	 * @param row An integer number for row.
+	 * @param col An integer number for column.
 	 * @param disc A character standing for disc color.
 	 */
 	placeDiskAt(row, col, disc){
@@ -601,7 +601,7 @@ module.exports = class this.board {
 
 		// change discs to top-right
 		if (topRightRow < row && topRightCol > col) {
-			let i = topRightRow+1;
+			var i = topRightRow+1;
 			var j = topRightCol-1;
 			while (i < row && j > col) {
 				if (this.board[i][j] == BLACK || this.board[i][j] == WHITE) {
@@ -614,7 +614,7 @@ module.exports = class this.board {
 
 		// change discs to top-left
 		if (topLeftRow < row && topLeftCol < col) {
-            let i = topLeftRow+1;
+            var i = topLeftRow+1;
             var j = topLeftCol+1;
             while (i < row && j < col) {
                 if (this.board[i][j] == BLACK || this.board[i][j] == WHITE) {
@@ -627,7 +627,7 @@ module.exports = class this.board {
 
 		// change discs to bottom-right
 		if (bottomRightRow > row && bottomRightCol > col) {
-            let i = bottomRightRow-1;
+            var i = bottomRightRow-1;
             var j = bottomRightCol-1;
             while (i > row && j > col) {
                 if (this.board[i][j] == BLACK || this.board[i][j] == WHITE) {
@@ -640,7 +640,7 @@ module.exports = class this.board {
 
 		// change discs to bottom-left
 		if (bottomLeftRow > row && bottomLeftCol < col) {
-            let i = bottomLeftRow-1;
+            var i = bottomLeftRow-1;
             var j = bottomLeftCol+1;
             while (i > row && j < col) {
                 if (this.board[i][j] == BLACK || this.board[i][j] == WHITE) {
@@ -760,4 +760,4 @@ module.exports = class this.board {
 }
 
 //let this.board = new this.board(10, 10);
-//board.prvarBoard();
+//board.printBoard();
