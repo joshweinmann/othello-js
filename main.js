@@ -35,11 +35,12 @@ function loadFile(file){
  * Driver function.  "main" method, if you will.
  */
 function start(){
- 	// Local variables
+ 	// Local variables SYNCHRONOUSLY read from keyboard
 	let height = prompt('What height for your board? ');
 	let width = prompt('What width for your board? ');
+	
+	let turn = 'b';
 
-	// SYNCHRONOUSLY read from keyboard
 	console.log('Creating a board with size ' + height + ' x ' + width + '.');
 	// Create new board object
 	let myBoard = new board(height, width);
@@ -47,7 +48,22 @@ function start(){
 	// Print board
 	myBoard.printBoard();
 
+	console.log(myBoard.isGameOver());
+
 	// Loop, asking user input, calling appropriate functions.
+	while(!myBoard.isGameOver()) {
+
+
+		let userInput = prompt(`it\'s ${turn}\'s turn: `);
+
+		console.log(userInput);
+		if ( userInput == 'q' ) {
+			break;
+		}
+
+		turn = turn == 'b' ? 'w' : 'b';
+
+	}
 
 	// Save board example code.
 	saveFile("test.json", myBoard);
