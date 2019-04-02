@@ -60,7 +60,401 @@ module.exports = class board {
 	 * @return A boolean indicating whether the move is valid.
 	 */
 	isValidMove(row, col, disc) {
-		return true;
+		var row_runner = row;
+		var col_runner = col;
+		var SIZE = this.board.length;
+
+		// console.log(`checking ${row}, ${col}, ${disc}`);
+
+		// space must be empty
+		if (this.board[row][col] != EMPTY) {
+			return false;
+		}
+
+		// top left 
+		if ( row == 0 && col == 0 ) {
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}	
+			// check south east for other player
+			if (this.board[row+1][col+1] != disc && this.board[row+1][col+1] != EMPTY) {
+				// run south east
+				for ( row_runner = row+2, col_runner = col+2; row_runner < SIZE && col_runner < SIZE; row_runner++, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}	
+		}
+
+		// top right
+		if ( row == 0 && col == (SIZE - 1) ) {
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check south west for other player
+			if (this.board[row+1][col-1] != disc && this.board[row+1][col-1] != EMPTY) {
+				// run south west
+				for ( row_runner = row+2, col_runner = col-2; row_runner < SIZE && col_runner > 0; row_runner++, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// bottom left
+		if ( row == (SIZE - 1) && col == 0 ) {
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check north east for other player
+			if (this.board[row-1][col+1] != disc && this.board[row-1][col+1] != EMPTY) {
+				// run northeast
+				for ( row_runner = row-2, col_runner = col+2; row_runner > 0 && col_runner < SIZE; row_runner--, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// bottom right 
+		if ( row == (SIZE - 1) && col == (SIZE - 1) ) {
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+			// check north west for other player
+			if (this.board[row-1][col-1] != disc && this.board[row-1][col-1] != EMPTY) {
+				// run north west
+				for ( row_runner = row-2, col_runner = col-2; row_runner > 0 && col_runner > 0; row_runner--, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// top
+		if ( row == 0 ) {
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+			
+			// check south west for other player
+			if (this.board[row+1][col-1] != disc && this.board[row+1][col-1] != EMPTY) {
+				// run south west
+				for ( row_runner = row+2, col_runner = col-2; row_runner < SIZE && col_runner > 0; row_runner++, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south east for other player
+			if (this.board[row+1][col+1] != disc && this.board[row+1][col+1] != EMPTY) {
+				// run south east
+				for ( row_runner = row+2, col_runner = col+2; row_runner < SIZE && col_runner < SIZE; row_runner++, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// right
+		if ( col == (SIZE - 1) && row != 0 ) {
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north west for other player
+			if (this.board[row-1][col-1] != disc && this.board[row-1][col-1] != EMPTY) {
+				// run north west
+				for ( row_runner = row-2, col_runner = col-2; row_runner > 0 && col_runner > 0; row_runner--, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south west for other player
+			if (this.board[row+1][col-1] != disc && this.board[row+1][col-1] != EMPTY) {
+				// run south west
+				for ( row_runner = row+2, col_runner = col-2; row_runner < SIZE && col_runner > 0; row_runner++, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// bottom 
+		if ( row == (SIZE - 1) ) {
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north west for other player
+			if (this.board[row-1][col-1] != disc && this.board[row-1][col-1] != EMPTY) {
+				// run north west
+				for ( row_runner = row-2, col_runner = col-2; row_runner > 0 && col_runner > 0; row_runner--, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north east for other player
+			if (this.board[row-1][col+1] != disc && this.board[row-1][col+1] != EMPTY) {
+				// run northeast
+				for ( row_runner = row-2, col_runner = col+2; row_runner > 0 && col_runner < SIZE; row_runner--, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+		}
+
+		// left 
+		if ( col == 0 && row != 0 ) {
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north east for other player
+			if (this.board[row-1][col+1] != disc && this.board[row-1][col+1] != EMPTY) {
+				// run northeast
+				for ( row_runner = row-2, col_runner = col+2; row_runner > 0 && col_runner < SIZE; row_runner--, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south east for other player
+			if (this.board[row+1][col+1] != disc && this.board[row+1][col+1] != EMPTY) {
+				// run south east
+				for ( row_runner = row+2, col_runner = col+2; row_runner < SIZE && col_runner < SIZE; row_runner++, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+		}
+
+		// middle of the this.board
+		if ( row < (SIZE - 1) && col < (SIZE - 1) && row != 0 && col != 0 ) {
+
+			// check north for other player
+			if (this.board[row-1][col] != disc && this.board[row-1][col] != EMPTY) {
+				// run north
+			 	for ( row_runner = row-2; row_runner > 0; row_runner--) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north east for other player
+			if (this.board[row-1][col+1] != disc && this.board[row-1][col+1] != EMPTY) {
+				// run northeast
+				for ( row_runner = row-2, col_runner = col+2; row_runner > 0 && col_runner < SIZE; row_runner--, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check east for other player
+			if (this.board[row][col+1] != disc && this.board[row][col+1] != EMPTY) {
+				// run east
+			 	for ( col_runner = col+2; col_runner < SIZE; col_runner++) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south east for other player
+			if (this.board[row+1][col+1] != disc && this.board[row+1][col+1] != EMPTY) {
+				// run south east
+				for ( row_runner = row+2, col_runner = col+2; row_runner < SIZE && col_runner < SIZE; row_runner++, col_runner++) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south for other player
+			if (this.board[row+1][col] != disc && this.board[row+1][col] != EMPTY) {
+				// run south
+			 	for ( row_runner = row+2; row_runner < SIZE; row_runner++) {
+			 		if ( this.board[row_runner][col] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check south west for other player
+			if (this.board[row+1][col-1] != disc && this.board[row+1][col-1] != EMPTY) {
+				// run south west
+				for ( row_runner = row+2, col_runner = col-2; row_runner < SIZE && col_runner > 0; row_runner++, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check west for other player
+			if (this.board[row][col-1] != disc && this.board[row][col-1] != EMPTY) {
+				// run west
+			 	for ( col_runner = col-2; col_runner > 0; col_runner--) {
+			 		if ( this.board[row][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+
+			// check north west for other player
+			if (this.board[row-1][col-1] != disc && this.board[row-1][col-1] != EMPTY) {
+				// run north west
+				for ( row_runner = row-2, col_runner = col-2; row_runner > 0 && col_runner > 0; row_runner--, col_runner--) {
+			 		if ( this.board[row_runner][col_runner] == disc ) 
+			 			return true;
+			 	}
+			}
+		}
+
+		// if it didn't fit any of those cases, it's not a valid move
+		return false;
 	}
 
 	/**
@@ -282,6 +676,7 @@ module.exports = class board {
 		for(let i=0; i<this.height; ++i){
 			for(let j=0; j<this.width; ++j){
 				// check if move is valid in space
+				// console.log(`checking ${i}, ${j}, ${disc}`);
 				if (this.isValidMove(i, j, disc)) 
 					return true;
 			}
@@ -321,12 +716,12 @@ module.exports = class board {
 			return true;
 		}
 
-		// check if valid move is available for black
+		// // check if valid move is available for black
 		else if (!this.isValidMoveAvailable(BLACK)) {
 			return true;
 		}
 
-		// check if valid move is available white
+		// // check if valid move is available white
 	    else if (!this.isValidMoveAvailable(WHITE)) {
 			return true;
 	    }
@@ -356,7 +751,7 @@ module.exports = class board {
 
 				// check for white discs
 				if (this.board[i][j] == WHITE) 
-            			w++;
+        			w++;
 			}
 		}
 
