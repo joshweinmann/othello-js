@@ -46,9 +46,8 @@ function start(){
 	// Create new board object
 	let myBoard = new board(height, width);
 
-	
-
 	// Loop, asking user input, calling appropriate functions.
+	gamePlay:
 	while(!myBoard.isGameOver()) {
 
 		// Print board
@@ -56,21 +55,22 @@ function start(){
 
 		if (!myBoard.isValidMoveAvailable(turn)) {
 			printf("No valid moves available for player %d. You lose your turn.\n",turn);
-		} else {
-			do {
-				let userInput = prompt(`It\'s ${turn}\'s turn. Enter [row] [col] to place your disc, or q to quit: `);
+		} 
+		else {
+			
+			let userInput = prompt(`It\'s ${turn}\'s turn. Enter [row] [col] to place your disc, or q to quit: `);
 
-				if ( userInput == 'q' || userInput == 'Q' )
-					break;
-				else if ( userInput.length != 3 || userInput[0] < 0 || userInput[0] > height-1 || userInput[2] < 0 || userInput[2] > width-1 ) {
-					continue;
-				}
-				let row = userInput[0]-1, col = userInput[2]-1;
-				if (!myBoard.isValidMove(row,col,turn)) {
-					console.log('Sorry, that is not a valid move. Try again.');
-					continue;
-				}
-			} while (true);
+			if ( userInput == 'q' || userInput == 'Q' )
+				break gamePlay;
+			else if ( userInput.length != 3 || userInput[0] < 0 || userInput[0] > height-1 || userInput[2] < 0 || userInput[2] > width-1 ) {
+				continue;
+			}
+			let row = userInput[0]-1, col = userInput[2]-1;
+			if (!myBoard.isValidMove(row,col,turn)) {
+				console.log('Sorry, that is not a valid move. Try again.');
+				continue;
+			}
+	
 			myBoard.placeDiskAt(row, col, turn);
 		} 
 
@@ -78,7 +78,7 @@ function start(){
 	}
 
 	const winner = myBoard.checkWinner();
-	if (winner == BLACK || winner == WHITE) {
+	if (winner == 'b' || winner == 'w') {
 		console.log(`Game Over. ${winner} won!`);
 	} else {
 		console.log('Game Over. Tie!')
